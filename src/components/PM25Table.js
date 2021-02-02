@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 
-import './../App.css';
+import './../PM25Table.css';
 
 export function createData(SiteName, Concentration) {
   return { SiteName, Concentration };

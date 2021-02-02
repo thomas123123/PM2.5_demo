@@ -6,12 +6,16 @@ import { PM25_API } from './config';
 
 import PM25Table from './components/PM25Table';
 
+import './App.css';
+
 export class App extends PureComponent{
 
     constructor(props){
         super(props);
         this.state = {
-          citys: []
+          citys: [],
+          waitFetch: true,
+          errMessage: ''
         };
     }
 
@@ -23,15 +27,19 @@ export class App extends PureComponent{
     _GetPM25Data = () => {
       fetch(PM25_API)
       .then(res => res.json())
-      .then(resbody => this.setState({ citys: resbody }))
-      .catch(err => console.log(err))
+      .then(resbody => this.setState({ citys: resbody, waitFetch: false }))
+      .catch(err => this.setState({ errMessage: err, waitFetch: false }))
     }
 
     render(){
-      const { citys } = this.state;
+      const { citys, waitFetch, errMessage } = this.state;
         return(
           <div>
-            <PM25Table citys={citys}/>
+            {(waitFetch)
+              ? <span id={'LoadingSpan'}>資料抓取中...</span>
+              : (errMessage.length !== 0)
+                ? <span>{`資料抓取失敗，錯誤訊息: ${errMessage}`}</span>
+                : <PM25Table citys={citys}/>}
           </div>
         );
     }
