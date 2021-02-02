@@ -40,7 +40,6 @@ test('testing descendingComparator by Concentration', () => {
   expect(descendingComparator(dataB, dataC, 'Concentration')).toBe(0);
 });
 
-// 這要重新檢查 有問題
 test('testing getComparator', () => {
   expect(getComparator('desc', 'Concentration')).toBeTruthy();
   expect(getComparator('asc', 'Concentration')).toBeTruthy();

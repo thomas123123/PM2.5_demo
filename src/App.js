@@ -25,7 +25,7 @@ export class App extends PureComponent{
 
     // 取的PM2.5資料
     _GetPM25Data = () => {
-      fetch(PM25_API)
+      return fetch(PM25_API)
       .then(res => res.json())
       .then(resbody => this.setState({ citys: resbody, waitFetch: false }))
       .catch(err => this.setState({ errMessage: err, waitFetch: false }))
